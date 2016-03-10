@@ -20,6 +20,21 @@
     return YES;
 }
 
+- (void)application:(UIApplication *)application handleEventsForBackgroundURLSession:(NSString *)identifier completionHandler:(void (^)())completionHandler
+{
+    NSLog(@"Background session UIApplicationDelegate method");
+    
+    UILocalNotification* locNot = [[UILocalNotification alloc] init];
+    locNot.fireDate = [NSDate dateWithTimeIntervalSinceNow:1];
+    locNot.alertBody = [NSString stringWithFormat:@"still alive!"];
+    locNot.timeZone = [NSTimeZone defaultTimeZone];
+    
+    [[UIApplication sharedApplication] scheduleLocalNotification:locNot];
+    
+    NSLog(@"completion handler: %@", completionHandler);
+    self.backgroundSessionCompletionHandler = completionHandler;
+}
+
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.

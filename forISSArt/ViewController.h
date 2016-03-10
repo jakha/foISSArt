@@ -8,7 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+
+@interface ViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+//@property (nonatomic, strong) NSURL * destinationPath;
+
+-(void) resultReciver:(NSURL *) destinationPath;
 
 
 @end
